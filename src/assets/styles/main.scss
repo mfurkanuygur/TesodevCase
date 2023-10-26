@@ -131,3 +131,24 @@ main {
     border: none;
   }
 }
+
+.carousel {
+  width: 100%;
+  position: relative;
+  .carousel-contents {
+    display: flex;
+    justify-content: center;
+  }
+  .carousel-buttons {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    display: flex;
+    justify-content: space-between;
+    button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+  }
+}

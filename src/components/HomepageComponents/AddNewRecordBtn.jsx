@@ -1,7 +1,8 @@
+import { Link } from "react-router-dom"
 
 const AddNewRecordBtn = () => {
   return (
-    <button className="new-record-btn">Add new record</button>
+    <Link to={"/addRecord"}><button className="new-record-btn">Add new record</button></Link>
   )
 }
 
