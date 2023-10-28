@@ -7,7 +7,7 @@ const Router = () => {
 
     const routes = useRoutes([
         { path: "/", element: <Homepage /> },
-        { path: "/result", element: <ResultPage /> },
+        { path: "/results", element: <ResultPage /> },
         { path: "/addRecord", element: <AddRecordPage /> },
 
     ])
