@@ -23,18 +23,20 @@ const SearchInput = () => {
         dispatch(setSearchInputValue(inputValueLowerCase))
     };
     return (
-        <div className="search-field">
-            <form >
-                <img src={searchIcon} alt="searchIcon" />
-                <input type="text" placeholder='You can search here...' ref={inputRef} value={searchInputValue} onChange={() => searchingValue()} />
-            </form>
-            <Link to="/results"><button type="submit">Search</button></Link>
+        <section className="search-field">
+            <div>
+                <form >
+                    <img src={searchIcon} alt="searchIcon" />
+                    <input type="text" placeholder='You can search here...' ref={inputRef} value={searchInputValue} onChange={() => searchingValue()} />
+                </form>
+                <Link to="/results"><button type="submit">Search</button></Link>
+            </div>
             <ul>
                 {filteredDatas?.map(result => (
                     <li key={result.id}>{result.nameSurname}</li>
                 ))}
             </ul>
-        </div>
+        </section>
     )
 }
 

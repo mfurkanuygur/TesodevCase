@@ -14,10 +14,10 @@ const ResultPage = () => {
 
   }, [])
   return (
-    <section >
+    <main >
       <SearchInput />
 
-    </section>
+    </main>
   )
 }
 
