@@ -17,7 +17,6 @@ const SearchInput = () => {
         const datas = mainDatas;
         const searchResults = datas.filter(data => data.nameSurname.toLowerCase().includes(inputValue.toLowerCase().trim()));
         const inputValueLowerCase = inputValue.toLowerCase().trim();
-        console.log(searchResults);
         inputValueLowerCase.length >= 2 ? dispatch(setFilteredDatas(searchResults)) : dispatch(setFilteredDatas(mainDatas));
         dispatch(setSearchInputValue(inputValueLowerCase));
         setCurrentPageNumber(1);
@@ -37,12 +36,45 @@ const SearchInput = () => {
         const buttons = [];
         for (let i = 1; i <= totalPage; i++) {
             buttons.push(
-                <button key={i} onClick={() => setCurrentPageNumber(i)}>
+                <button key={i} onClick={() => (setCurrentPageNumber(i))} style={{ backgroundColor: i === currentPageNumber ? 'red' : 'white' }}>
                     {i}
                 </button>
             );
         }
-        return buttons;
+        if (buttons.length < 7) {
+            return buttons
+        }
+        else {
+            let limitedButtons = []
+            if (currentPageNumber < 3) {
+                limitedButtons.push(
+                    buttons.slice(0, 3), "...", buttons.slice(buttons.length - 3, buttons.length)
+                )
+            }
+            else if (currentPageNumber == 3) {
+                limitedButtons.push(buttons.slice(0, currentPageNumber + 1), "...", buttons.slice(buttons.length - 2, buttons.length))
+            }
+
+            else if (currentPageNumber > 3 && currentPageNumber < buttons.length - 2) {
+                limitedButtons.push(
+                    buttons.slice(0, 2),
+                    (currentPageNumber == 4 ? "" : "..."),
+                    buttons.slice(currentPageNumber - 2, currentPageNumber + 1),
+                    (currentPageNumber >= buttons.length - 3 ? "" : "..."),
+                    buttons.slice(buttons.length - 2, buttons.length)
+                )
+            }
+            else if (currentPageNumber == buttons.length - 2) {
+                limitedButtons.push(buttons.slice(0, 2), "...", buttons.slice(currentPageNumber - 2, buttons.length))
+            }
+            else {
+                limitedButtons.push(
+                    buttons.slice(0, 3), "...", buttons.slice(buttons.length - 3, buttons.length)
+                )
+            }
+
+            return limitedButtons
+        }
     }
     const paginationButtons = renderPaginationButtons();
     return (
@@ -61,11 +93,9 @@ const SearchInput = () => {
             </ul>
 
 
-            <button disabled={currentPageNumber == 1} onClick={() => setCurrentPageNumber(currentPageNumber - 1)}>Prev</button>
-            {
-                paginationButtons
-            }
-            <button disabled={currentPageNumber == totalPage || filteredDatas.length == 0} onClick={() => setCurrentPageNumber(currentPageNumber + 1)}>Next</button>
+            <button disabled={currentPageNumber == 1} onClick={() => (setCurrentPageNumber(currentPageNumber - 1))}>Prev</button>
+            {paginationButtons}
+            <button disabled={currentPageNumber == totalPage || filteredDatas.length == 0} onClick={() => (setCurrentPageNumber(currentPageNumber + 1))}>Next</button>
 
         </section>
     )
