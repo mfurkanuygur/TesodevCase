@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { getData } from "../request";
 import { setAllDataFromStorage } from "../redux/slices/searchSlice";
 import SortData from "../components/ResultPageComponents/SortData";
+import AddNewRecordBtn from "../components/HomepageComponents/AddNewRecordBtn";
 
 const ResultPage = () => {
   const dispatch = useDispatch();
@@ -14,9 +15,10 @@ const ResultPage = () => {
 
   }, [])
   return (
-    <main style={{display:"flex"}}>
+    <main style={{ display: "flex" }}>
       <SortData />
       <SearchInput />
+      <AddNewRecordBtn />
     </main>
   )
 }

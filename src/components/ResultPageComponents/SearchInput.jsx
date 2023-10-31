@@ -22,7 +22,7 @@ const SearchInput = () => {
         setCurrentPageNumber(1);
     };
 
-    const [perPage, setPerPage] = useState(5);
+    const [perPage] = useState(5);
     const [currentPageNumber, setCurrentPageNumber] = useState(1)
     const totalPage = Math.ceil(filteredDatas.length / 5)
 
