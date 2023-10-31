@@ -4,22 +4,22 @@ import { useEffect } from "react";
 import { getData } from "../request";
 import { setAllDataFromStorage } from "../redux/slices/searchSlice";
 import SortData from "../components/ResultPageComponents/SortData";
-import AddNewRecordBtn from "../components/HomepageComponents/AddNewRecordBtn";
+import AddNewRecordBtn from "../components/AddNewRecordBtn";
 
 const ResultPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getData();
-    dispatch(setAllDataFromStorage(JSON.parse(sessionStorage.getItem("syncData"))))
+    getData().then(data => dispatch(setAllDataFromStorage(data)));
+    // dispatch(setAllDataFromStorage(JSON.parse(sessionStorage.getItem("syncData"))))
 
   }, [])
   return (
-    <main style={{ display: "flex" }}>
+    <section >
       <SortData />
       <SearchInput />
       <AddNewRecordBtn />
-    </main>
+    </section>
   )
 }
 

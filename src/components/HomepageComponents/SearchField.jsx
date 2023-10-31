@@ -16,7 +16,7 @@ const SearchField = () => {
     const searchingValue = () => {
         const inputValue = inputRef.current.value;
         const datas = mainDatas;
-        const searchResults = datas.filter(data => data.nameSurname.toLowerCase().includes(inputValue.toLowerCase().trim()));
+        const searchResults = datas.filter(data => data?.nameSurname?.toLowerCase().includes(inputValue.toLowerCase().trim()));
         const inputValueLowerCase = inputValue.toLowerCase().trim();
         //trimi kontrol et
         inputValueLowerCase.length >= 2 ? dispatch(setFilteredDatas(searchResults)) : dispatch(setFilteredDatas(mainDatas))

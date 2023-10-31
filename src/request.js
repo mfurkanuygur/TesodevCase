@@ -10022,7 +10022,7 @@ export const synchronizationData = rawDatas.data.map((data) => {
 // console.log(synchronizationData)
 
 
-export const getData = () => {
+export const getData = async () => {
     // sessionStorage.clear()
     // fetch('http://localhost:3000/data', {
     //     method: 'POST',
@@ -10038,6 +10038,43 @@ export const getData = () => {
     //     .catch(error => {
     //         console.error('POST işlemi sırasında hata oluştu:', error);
     //     });
-    sessionStorage.setItem('syncData', JSON.stringify(synchronizationData));
+    // sessionStorage.setItem('syncData', JSON.stringify(synchronizationData));
+
+    try {
+        const response = await fetch('http://localhost:3000/datas');
+        if (!response.ok) {
+            throw new Error('HTTP Hatası: ' + response.status);
+        }
+
+        const data = await response.json();
+        console.log('Veri başarıyla alındı:', data);
+        return data;
+    } catch (error) {
+        console.error('GET işlemi sırasında hata oluştu:', error);
+        throw error;
+    }
+
 
 }
+export const postData = async (allItems) => {
+    try {
+        const response = await fetch('http://localhost:3000/datas', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(allItems)
+        });
+
+        if (!response.ok) {
+            throw new Error('HTTP Hatası: ' + response.status);
+        }
+
+        const data = await response.json();
+        console.log('Veri başarıyla POST edildi:', data);
+        return data;
+    } catch (error) {
+        console.error('POST işlemi sırasında hata oluştu:', error);
+        throw error;
+    }
+};

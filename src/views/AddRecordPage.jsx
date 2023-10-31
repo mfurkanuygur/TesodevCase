@@ -1,8 +1,9 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setAllDataFromStorage } from "../redux/slices/searchSlice";
 import { Link } from "react-router-dom";
-import { synchronizationData } from "../request";
+import { postData } from "../request";
+import logo from "../assets/images/logo.png"
+import backArrow from "../assets/images/backArrow.svg"
 
 const AddRecordPage = () => {
   const [nameSurname, setNameSurname] = useState("");
@@ -19,7 +20,7 @@ const AddRecordPage = () => {
   const urlPattern = /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?\/?$/
 
 
-
+  const mainDatas = useSelector((state) => state?.search?.allDatas)
 
   const checkValidation = (e) => {
     e.preventDefault()
@@ -69,8 +70,6 @@ const AddRecordPage = () => {
       newErrors.city = 'min2 max 40.';
     }
     else {
-
-      const datasOnSS = JSON.parse(sessionStorage.getItem("syncData"))
       const newItem = {
         "id": self.crypto.randomUUID(),
         "nameSurname": nameSurname,
@@ -81,11 +80,10 @@ const AddRecordPage = () => {
         "country": country,
         "city": city
       }
-      const updatedDataOnSS = [newItem, ...synchronizationData]
-      sessionStorage.clear()
-      sessionStorage.setItem('syncData', JSON.stringify(updatedDataOnSS));
-      
-      dispatch(setAllDataFromStorage(JSON.parse(sessionStorage.getItem("syncData"))))
+      const updatedDataOnSS = [newItem, ...mainDatas]
+
+      postData(newItem).then(() => console.log("veri gitti"))
+
 
 
       setNameSurname("")
@@ -97,47 +95,57 @@ const AddRecordPage = () => {
 
     setErrorMessage(newErrors)
   }
-  const mainDatas = useSelector((state) => state?.search?.allDatas)
 
-  console.log(mainDatas)
   return (
-   <div>
-    <Link to={"/"}>ana</Link>
-      <form onSubmit={(e) => checkValidation(e)}>
+    <section className="record-page">
+      <div className="container">
+        <Link className="logo" to={"/"}><img src={logo} alt="logo" /></Link>
         <div>
-          {errorMessage ? <p>{errorMessage?.nameSurname}</p> : <p></p>}
-          <label htmlFor="nameSurname">Name Surname</label>
-          <input id="nameSurname" placeholder="Enter name and surname" value={nameSurname} type="text" onChange={(e) => setNameSurname(e.target.value)} />
+          <Link to={"/results"} className="return-page-div">
+            <img src={backArrow} alt="backArrow" />
+            <h3>Return to List Page</h3>
+          </Link>
+          <form onSubmit={(e) => checkValidation(e)}>
+            <div>
+              <label htmlFor="nameSurname">Name Surname:</label>
+              <input id="nameSurname" placeholder="Enter name and surname" value={nameSurname} type="text" onChange={(e) => setNameSurname(e.target.value)} />
+              {errorMessage ? <p>{errorMessage?.nameSurname}</p> : <p></p>}
+            </div>
+
+            <div>
+              <label htmlFor="email">Email:</label>
+              <input id="email" placeholder="Enter an e-mail(abc@xyz.com)" value={email} type="text" onChange={(e) => setEmail(e.target.value)} />
+              {errorMessage ? <p>{errorMessage?.email}</p> : <p></p>}
+            </div>
+
+            <div>
+              <label htmlFor="website">Website:</label>
+              <input id="website" placeholder="Enter a website" value={website} type="text" onChange={(e) => setWebsite(e.target.value)} />
+              {errorMessage ? <p>{errorMessage?.website}</p> : <p></p>}
+            </div>
+
+            <div>
+              <label htmlFor="country">Country:</label>
+              <input id="country" placeholder="Enter a country" value={country} type="text" onChange={(e) => setCountry(e.target.value)} />
+              {errorMessage ? <p>{errorMessage?.country}</p> : <p></p>}
+            </div>
+
+            <div>
+              <label htmlFor="city">City:</label>
+              <input id="city" placeholder="Enter a city" value={city} type="text" onChange={(e) => setCity(e.target.value)} />
+              {errorMessage ? <p>{errorMessage?.city}</p> : <p></p>}
+            </div>
+
+            <div>
+              <div>
+                <button type="submit" disabled={isSubmitDisabled}>Add</button>
+              </div>
+            </div>
+
+          </form>
         </div>
-  
-        <div>
-          {errorMessage ? <p>{errorMessage?.email}</p> : <p></p>}
-          <label htmlFor="email">Email</label>
-          <input id="email" placeholder="Enter an e-mail(abc@xyz.com)" value={email} type="text" onChange={(e) => setEmail(e.target.value)} />
-        </div>
-  
-        <div>
-          {errorMessage ? <p>{errorMessage?.website}</p> : <p></p>}
-          <label htmlFor="website">Website</label>
-          <input id="website" placeholder="Enter a website" value={website} type="text" onChange={(e) => setWebsite(e.target.value)} />
-        </div>
-  
-        <div>
-          {errorMessage ? <p>{errorMessage?.country}</p> : <p></p>}
-          <label htmlFor="country">Country</label>
-          <input id="country" placeholder="Enter a country" value={country} type="text" onChange={(e) => setCountry(e.target.value)} />
-        </div>
-  
-        <div>
-          {errorMessage ? <p>{errorMessage?.city}</p> : <p></p>}
-          <label htmlFor="city">City</label>
-          <input id="city" placeholder="Enter a city" value={city} type="text" onChange={(e) => setCity(e.target.value)} />
-        </div>
-  
-        <button type="submit" disabled={isSubmitDisabled}>Add</button>
-  
-      </form>
-   </div>
+      </div>
+    </section>
   )
 }
 

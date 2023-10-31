@@ -1,11 +1,11 @@
 import { useEffect } from "react"
-import AddNewRecordBtn from "../components/HomepageComponents/AddNewRecordBtn"
+import AddNewRecordBtn from "../components/AddNewRecordBtn"
 import Footer from "../components/HomepageComponents/Footer"
 import Logo from "../components/HomepageComponents/Logo"
 import SearchField from "../components/HomepageComponents/SearchField"
 import Slider from "../components/HomepageComponents/Slider"
 import { getData } from "../request"
-import {  useDispatch, useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { setAllDataFromStorage } from "../redux/slices/searchSlice"
 
 const Homepage = () => {
@@ -14,20 +14,20 @@ const Homepage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getData();
-    dispatch(setAllDataFromStorage(JSON.parse(sessionStorage.getItem("syncData"))))
+    getData().then(data => dispatch(setAllDataFromStorage(data)));
+    // dispatch(setAllDataFromStorage(JSON.parse(sessionStorage.getItem("syncData"))))
 
-    
+
   }, [])
 
   return (
-    <main>
+    <section>
       <AddNewRecordBtn />
       <Logo />
       <SearchField />
       <Slider />
       <Footer />
-    </main>
+    </section>
   )
 }
 
