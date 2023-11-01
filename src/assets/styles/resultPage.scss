@@ -11,6 +11,10 @@
     padding: 50px;
     margin: 0 auto;
     gap: 2rem;
+    @media screen and (max-width: 800px) {
+      padding:50px 10px;
+ 
+    }
     .logo {
       height: max-content;
       img {
@@ -31,14 +35,55 @@
       align-items: center;
       flex-direction: column;
       gap: 50px;
+      margin-left: 75px;
+      @media screen and (max-width: 970px) {
+        margin-left: 0px;
+      }
       @media screen and (max-width: 550px) {
         gap: 20px;
         margin-bottom: 20px;
       }
-      select {
-        margin-left: 75px;
-        @media screen and (max-width: 550px) {
-          margin-left: 0px;
+      .sort-section {
+        @media screen and (max-width: 900px) {
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+         
+        }
+        p {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          width: fit-content;
+          margin: 0;
+          margin-bottom: 10px;
+          padding: 5px 10px;
+          color: #484848;
+          font-size: 18px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: normal;
+          border-radius: 8px;
+          border: 1px solid #414141;
+          background: #f3f2f2;
+        }
+        select {
+          padding: 10px 15px;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: normal;
+          color: #000;
+          @media screen and (max-width: 550px) {
+            margin-left: 0px;
+          }
+          option {
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            color: #000;
+          }
         }
       }
     }

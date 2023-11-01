@@ -1,0 +1,36 @@
+.homepage-section {
+  justify-content: center;
+  .container {
+    padding: 50px;
+    width: auto;
+    margin: 0 auto;
+    nav {
+      display: flex;
+      justify-content: end;
+      @media screen and (max-width: 800px) {
+        justify-content: center;
+      }
+    }
+    .find-in-records {
+      width: 700px;
+      @media screen and (max-width: 800px) {
+        width: max-content;
+        margin: 0 auto;
+      }
+      margin: 0 auto;
+      div {
+        display: flex;
+        h1 {
+          color: var(--ink-darkest, #090a0a);
+          margin: 10px 0;
+          font-family: "Inter", "sans-serif";
+          font-size: 32px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 36px;
+          width: max-content;
+        }
+      }
+    }
+  }
+}

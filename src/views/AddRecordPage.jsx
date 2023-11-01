@@ -1,101 +1,126 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { postData } from "../request";
+import { getData, postData } from "../request";
 import logo from "../assets/images/logo.png"
 import backArrow from "../assets/images/backArrow.svg"
+import { setAllDataFromStorage } from "../redux/slices/searchSlice";
+import ToastMessage from "../components/ToastMessage";
 
 const AddRecordPage = () => {
+  const dispatch = useDispatch()
+
   const [nameSurname, setNameSurname] = useState("");
   const [email, setEmail] = useState("");
   const [website, setWebsite] = useState("");
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
   const isSubmitDisabled = !nameSurname || !email || !website || !country || !city;
-  const dispatch = useDispatch()
   const [errorMessage, setErrorMessage] = useState()
 
-  const letterPattern = /^[a-zA-Z]+$/;
+  const letterPattern = /^[a-z A-Z]+$/;
   const mailPattern = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/
   const urlPattern = /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?\/?$/
 
-
   const mainDatas = useSelector((state) => state?.search?.allDatas)
+  const [toastMessage, setToastMessage] = useState()
 
   const checkValidation = (e) => {
     e.preventDefault()
     const newErrors = {}
-    //nameSurname
-    if (nameSurname?.trim() == "") {
-      newErrors.nameSurname = "required"
-    }
-    else if (!letterPattern.test(nameSurname)) {
-      newErrors.nameSurname = 'Sadece harf girişi yapabilirsiniz.';
-    }
-    else if (nameSurname.trim().length < 4 || nameSurname.trim().length > 60) {
-      newErrors.nameSurname = 'min4 max 60.';
-    }
-    //email
-    if (email.trim() == "") {
-      newErrors.email = "required"
-    }
-    else if (!mailPattern.test(email)) {
-      newErrors.email = "not correct email format"
-    }
-    //website
-    if (website.trim() == "") {
-      newErrors.website = "required"
-    }
-    else if (!urlPattern.test(website)) {
-      newErrors.website = "not correct url format"
-    }
-    //country
-    if (country.trim() == "") {
-      newErrors.country = "required"
-    }
-    else if (!letterPattern.test(country)) {
-      newErrors.country = 'Sadece harf girişi yapabilirsiniz.';
-    }
-    else if (country.trim().length < 2 || country.trim().length > 40) {
-      newErrors.country = 'min2 max 40..';
-    }
-    //city
-    if (city.trim() == "") {
-      newErrors.city = "required"
-    }
-    else if (!letterPattern.test(city)) {
-      newErrors.city = 'Sadece harf girişi yapabilirsiniz.';
-    }
-    else if (city.trim().length < 2 || city.trim().length > 40) {
-      newErrors.city = 'min2 max 40.';
+    const itemExists = mainDatas.some((item) => item.nameSurname.toLowerCase() === nameSurname.toLowerCase()
+      && item.email.toLowerCase() === email.toLowerCase()
+      && item.website.toLowerCase() === website.toLowerCase())
+
+    if (itemExists) {
+
+      setToastMessage("Data with the same information already exists")
+
     }
     else {
-      const newItem = {
-        "id": self.crypto.randomUUID(),
-        "nameSurname": nameSurname,
-        "company": null,
-        "email": email,
-        "phone": null,
-        "website": website,
-        "country": country,
-        "city": city
+      if (nameSurname?.trim() == "") {
+        newErrors.nameSurname = "Name and Surname are required"
       }
-      const updatedDataOnSS = [newItem, ...mainDatas]
+      else if (!letterPattern.test(nameSurname)) {
+        newErrors.nameSurname = 'You can use only letters';
+      }
+      else if (nameSurname.trim().length < 4 || nameSurname.trim().length > 60) {
+        newErrors.nameSurname = 'Min 4 max 60. characters';
+      }
+      if (email.trim() == "") {
+        newErrors.email = "Email is required"
+      }
+      else if (!mailPattern.test(email)) {
+        newErrors.email = "Not correct email format"
+      }
+      if (website.trim() == "") {
+        newErrors.website = "Website is required"
+      }
+      else if (!urlPattern.test(website)) {
+        newErrors.website = "Not correct url format"
+      }
+      if (country.trim() == "") {
+        newErrors.country = "Country is required"
+      }
+      else if (!letterPattern.test(country)) {
+        newErrors.country = 'You can use only letters';
+      }
+      else if (country.trim().length < 2 || country.trim().length > 40) {
+        newErrors.country = 'Min 2 max 40. characters';
+      }
+      if (city.trim() == "") {
+        newErrors.city = "Cisty is required"
+      }
+      else if (!letterPattern.test(city)) {
+        newErrors.city = 'You can use only letters';
+      }
+      else if (city.trim().length < 2 || city.trim().length > 40) {
+        newErrors.city = 'Min 2 max 40. characters';
+      }
 
-      postData(newItem).then(() => console.log("veri gitti"))
+      if (Object.keys(newErrors).length === 0) {
 
+        const newItem = {
+          "id": self.crypto.randomUUID(),
+          "nameSurname": nameSurname,
+          "company": null,
+          "email": email,
+          "phone": null,
+          "website": website,
+          "country": country,
+          "city": city
+        }
 
+        postData(newItem)
+          .then(() => {
+            setToastMessage("data posted successfuly")
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            setToastMessage("An error occurred while posting the data");
+          });
 
-      setNameSurname("")
-      setEmail("")
-      setCity("")
-      setCountry("")
-      setWebsite("")
+        setNameSurname("")
+        setEmail("")
+        setCity("")
+        setCountry("")
+        setWebsite("")
+      }
+      else {
+        setToastMessage("Errors in the form. Please fix them.");
+      }
+      setErrorMessage(newErrors)
+
     }
-
-    setErrorMessage(newErrors)
   }
 
+
+  useEffect(() => {
+    getData().then(data => dispatch(setAllDataFromStorage(data)));
+  }, [])
+  const closeToast = () => {
+    setToastMessage(''); // Clear the toastMessage to hide the message
+  };
   return (
     <section className="record-page">
       <div className="container">
@@ -143,6 +168,9 @@ const AddRecordPage = () => {
             </div>
 
           </form>
+          {
+            toastMessage && <ToastMessage message={toastMessage}  onClose={closeToast}/>
+          }
         </div>
       </div>
     </section>

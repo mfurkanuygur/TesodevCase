@@ -1,29 +1,12 @@
-import { useRef, useState } from 'react'
-import searchIcon from '../../assets/images/searchIcon.svg'
+import { useState } from 'react'
 import map from '../../assets/images/map.svg'
-import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { setFilteredDatas, setSearchInputValue } from "../../redux/slices/searchSlice"
-import SortData from "./SortData";
+import { useSelector } from 'react-redux'
 import SearchBar from '../SearchBar'
 
 
 const ResultsListField = () => {
-    // const inputRef = useRef()
-    // const dispatch = useDispatch();
-    // const mainDatas = useSelector((state) => state?.search?.allDatas)
     const filteredDatas = useSelector((state) => state?.search?.filteredDatas)
     const searchInputValue = useSelector((state) => state?.search?.searchInputValue)
-
-    // const searchingValue = () => {
-    //     const inputValue = inputRef.current.value;
-    //     const datas = mainDatas;
-    //     const searchResults = datas.filter(data => data?.nameSurname?.toLowerCase().includes(inputValue.toLowerCase().trim()));
-    //     const inputValueLowerCase = inputValue.toLowerCase().trim();
-    //     inputValueLowerCase.length >= 2 ? dispatch(setFilteredDatas(searchResults)) : dispatch(setFilteredDatas(mainDatas));
-    //     dispatch(setSearchInputValue(inputValueLowerCase));
-    //     setCurrentPageNumber(1);
-    // };
 
     const [perPage] = useState(5);
     const [currentPageNumber, setCurrentPageNumber] = useState(1)
@@ -62,7 +45,6 @@ const ResultsListField = () => {
             else if (currentPageNumber == 3) {
                 limitedButtons.push(buttons.slice(0, currentPageNumber + 1), "...", buttons.slice(buttons.length - 2, buttons.length))
             }
-
             else if (currentPageNumber > 3 && currentPageNumber < buttons.length - 2) {
                 limitedButtons.push(
                     buttons.slice(0, 2),
@@ -80,23 +62,16 @@ const ResultsListField = () => {
                     buttons.slice(0, 3), "...", buttons.slice(buttons.length - 3, buttons.length)
                 )
             }
-
             return limitedButtons
         }
     }
     const paginationButtons = renderPaginationButtons();
     return (
         <div className="results-list-field">
-            {/* <div>
-                <form >
-                    <img src={searchIcon} alt="searchIcon" />
-                    <input type="text" placeholder='You can search here...' ref={inputRef} value={searchInputValue} onChange={() => searchingValue()} />
-                </form>
-                <Link to="/results"><button type="submit">Search</button></Link>
-            </div> */}
+
             <SearchBar setCurrentPageNumber={setCurrentPageNumber} />
             <div>
-                {filteredDatas?.length > 0 ?
+                {filteredDatas?.length > 0 && searchInputValue.length !== 1 && searchInputValue.length !== 0 ?
                     <div>
                         <ul>
                             {paginationData().map(result => (
@@ -121,15 +96,13 @@ const ResultsListField = () => {
                         </ul>
                         <div className='pagination-field'>
                             <button disabled={currentPageNumber == 1} onClick={() => (setCurrentPageNumber(currentPageNumber - 1))}>Previous</button>
-                            {paginationButtons}
+                            <div>{paginationButtons}</div>
                             <button disabled={currentPageNumber == totalPage || filteredDatas.length == 0} onClick={() => (setCurrentPageNumber(currentPageNumber + 1))}>Next</button>
                         </div>
                     </div> :
-                    <div className='search-error-msg'>Data not found</div>
+                    <div className='search-error-msg'>Please enter a valid search terms</div>
                 }
             </div>
-
-
         </div>
     )
 }

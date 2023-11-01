@@ -1,0 +1,21 @@
+.logo-section {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .logo-field {
+      margin-top: 5rem;
+      h6 {
+        margin: 0.625rem 0;
+        right: -2rem;
+        position: relative;
+        text-align: end;
+        color: #484848;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+      }
+    }
+  }

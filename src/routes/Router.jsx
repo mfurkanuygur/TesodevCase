@@ -4,12 +4,10 @@ import ResultPage from '../views/ResultPage'
 import AddRecordPage from '../views/AddRecordPage'
 
 const Router = () => {
-
     const routes = useRoutes([
         { path: "/", element: <Homepage /> },
         { path: "/results", element: <ResultPage /> },
         { path: "/addRecord", element: <AddRecordPage /> },
-
     ])
     return routes
 }

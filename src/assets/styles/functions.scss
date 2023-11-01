@@ -10,7 +10,6 @@
 
   color: #fff;
   background-color: $primary;
-
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
@@ -35,9 +34,6 @@
   border-radius: 10px;
   border: 1px solid;
   transition: 0.3s ease;
-  // &:hover {
-  //   background-color: $secondary;
-  // }
   &:hover {
     color: white;
     background-color: $secondary;

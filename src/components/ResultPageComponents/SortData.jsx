@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { setFilteredDatas } from "../../redux/slices/searchSlice"
+import sort from '../../assets/images/sort.png'
 
 const OrderData = () => {
     const filteredDatas = useSelector((state) => state?.search?.filteredDatas)
@@ -28,13 +29,16 @@ const OrderData = () => {
     }
 
     return (
-        <select onChange={(e) => { sortChange(e.target.value) }}>
-            <option value="default">Default</option>
-            <option value="nameSurnameInc">Name Surname(Inc)</option>
-            <option value="nameSurnameDec">Name Surname(Dec)</option>
-            <option value="countryInc">Country(Inc)</option>
-            <option value="countryDec">Country(Dec)</option>
-        </select>
+        <div className="sort-section">
+            <p><img src={sort} alt="" />Order By</p>
+            <select onChange={(e) => { sortChange(e.target.value) }}>
+                <option value="default">Default</option>
+                <option value="nameSurnameInc">Name Surname(A-Z)</option>
+                <option value="nameSurnameDec">Name Surname(Z-A)</option>
+                <option value="countryInc">Country(A-Z)</option>
+                <option value="countryDec">Country(Z-A)</option>
+            </select>
+        </div>
     )
 }
 

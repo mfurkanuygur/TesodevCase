@@ -24,6 +24,7 @@
       }
     }
     div {
+
       @media screen and (max-width: 550px) {
         width: 100%;
         padding: 0 30px;
@@ -91,6 +92,7 @@
           }
           p {
             padding: 0;
+            min-height: 20px;
             margin: 5px 10px 10px;
             color: rgba(255, 0, 0, 0.5);
             font-size: 18px;

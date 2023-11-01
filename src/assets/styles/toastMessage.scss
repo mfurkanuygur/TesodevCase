@@ -1,0 +1,32 @@
+.toast-message {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 15px;
+  padding: 20px 30px;
+  border-radius: 20px;
+  background-color: gainsboro;
+
+  @media screen and (max-width: 800px) {
+    height: fit-content;
+    position: fixed;
+    width: auto;
+    margin: 15px 0;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+    text-align: center;
+  }
+  h3 {
+    margin: 10px 0;
+  }
+  p {
+    color: var(--ink-darkest, #090a0a);
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 36px; /* 257.143% */
+  }
+}

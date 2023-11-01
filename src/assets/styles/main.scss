@@ -1,10 +1,16 @@
 @use "./variables.scss" as *;
 @import "./resultPage.scss";
+@import "./homePage.scss";
+@import "./logo.scss";
 @import "./resultsListField.scss";
+@import "./homepageSearch.scss";
 @import "./addRecordPage.scss";
 @import "./searchBar.scss";
 @import "./functions.scss";
 @import "./addNewRecordBtn.scss";
+@import "./footer.scss";
+@import "./slider.scss";
+@import "./toastMessage.scss";
 
 body {
   padding: 0;
@@ -12,7 +18,6 @@ body {
   font-family: "Roboto", sans-serif;
 }
 .container {
-  width: 1140px;
   @media screen and (max-width: $genislik-kucuk) {
     width: 768px;
   }
@@ -23,73 +28,5 @@ body {
 
   @media screen and (min-width: #{$genislik-orta + 1}) {
     width: 1280px;
-  }
-}
-
-// main {
-//   position: relative;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   flex-direction: column;
-//   .logo-section {
-//     margin-top: 11.625rem;
-//     h6 {
-//       margin: 0.625rem 0;
-//       right: -2rem;
-//       position: relative;
-//       text-align: end;
-//       color: #484848;
-//       font-size: 14px;
-//       font-style: normal;
-//       font-weight: 700;
-//       line-height: normal;
-//     }
-//   }
-
-// .footer {
-//   background: rgba(41, 78, 152, 0.72);
-//   width: 100%;
-//   padding: 27px 0;
-//   display: flex;
-//   align-items: center;
-//   justify-content: space-evenly;
-//   div {
-//     display: flex;
-//     justify-content: center;
-//     img {
-//       width: 217.419px;
-//       height: 179.496px;
-//     }
-//     div {
-//       display: flex;
-//       flex-direction: column;
-//       justify-content: space-evenly;
-//       width: 424.981px;
-//     }
-//   }
-//   iframe {
-//     border: none;
-//   }
-// }
-
-.carousel {
-  width: 100%;
-  position: relative;
-  .carousel-contents {
-    display: flex;
-    justify-content: center;
-  }
-  .carousel-buttons {
-    width: 100%;
-    position: absolute;
-    top: 50%;
-    display: flex;
-    justify-content: space-between;
-    button {
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-    }
   }
 }
