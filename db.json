@@ -9999,36 +9999,6 @@
       "website": "http://seattletimes.com",
       "country": "France",
       "city": "Issoudun"
-    },
-    {
-      "id": "33d3a867-931b-4c92-a424-5810772703bb",
-      "nameSurname": "furkan",
-      "company": null,
-      "email": "aaaa@gmail.com",
-      "phone": null,
-      "website": "www.asd.com",
-      "country": "test",
-      "city": "test"
-    },
-    {
-      "id": "46960a2c-a3e1-4f8a-8742-4c7db6117804",
-      "nameSurname": "furkan",
-      "company": null,
-      "email": "asdsd@gmail.com",
-      "phone": null,
-      "website": "www.test.com",
-      "country": "test",
-      "city": "asdfgf"
-    },
-    {
-      "id": "c89da93c-fa45-4ac3-9d73-7edd190136b4",
-      "nameSurname": "furkan",
-      "company": null,
-      "email": "asdsd@gmail.com",
-      "phone": null,
-      "website": "www.asd.com",
-      "country": "turkey",
-      "city": "sivas"
     }
   ]
 }

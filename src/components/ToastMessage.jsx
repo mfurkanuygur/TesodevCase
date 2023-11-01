@@ -1,11 +1,12 @@
 import { useEffect } from "react";
+import PropTypes from 'prop-types'
 
 const ToastMessage = ({ message, onClose }) => {
 
     useEffect(() => {
         const timer = setTimeout(() => {
             onClose();
-        }, 3000); // Close the message after 3 seconds
+        }, 3000);
 
         return () => {
             clearTimeout(timer);
@@ -20,3 +21,8 @@ const ToastMessage = ({ message, onClose }) => {
 };
 
 export default ToastMessage;
+
+ToastMessage.propTypes = {
+    message: PropTypes.string,
+    onClose: PropTypes.func
+}

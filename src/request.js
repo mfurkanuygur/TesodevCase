@@ -10012,6 +10012,7 @@ const rawDatas = {
         ]
     ]
 }
+
 export const synchronizationData = rawDatas.data.map((data) => {
     const syncDatas = {};
     for (let i = 0; i < rawDatas.cols.length; i++) {

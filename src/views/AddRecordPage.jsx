@@ -29,13 +29,11 @@ const AddRecordPage = () => {
     e.preventDefault()
     const newErrors = {}
     const itemExists = mainDatas.some((item) => item.nameSurname.toLowerCase() === nameSurname.toLowerCase()
-      && item.email.toLowerCase() === email.toLowerCase()
-      && item.website.toLowerCase() === website.toLowerCase())
+      || item.email.toLowerCase() === email.toLowerCase()
+      || item.website.toLowerCase() === website.toLowerCase())
 
     if (itemExists) {
-
       setToastMessage("Data with the same information already exists")
-
     }
     else {
       if (nameSurname?.trim() == "") {
@@ -93,10 +91,9 @@ const AddRecordPage = () => {
 
         postData(newItem)
           .then(() => {
-            setToastMessage("data posted successfuly")
+            setToastMessage("Data posted successfully")
           })
-          .catch((error) => {
-            console.error("Error:", error);
+          .catch(() => {
             setToastMessage("An error occurred while posting the data");
           });
 
@@ -119,7 +116,7 @@ const AddRecordPage = () => {
     getData().then(data => dispatch(setAllDataFromStorage(data)));
   }, [])
   const closeToast = () => {
-    setToastMessage(''); // Clear the toastMessage to hide the message
+    setToastMessage('');
   };
   return (
     <section className="record-page">
@@ -169,7 +166,7 @@ const AddRecordPage = () => {
 
           </form>
           {
-            toastMessage && <ToastMessage message={toastMessage}  onClose={closeToast}/>
+            toastMessage && <ToastMessage message={toastMessage} onClose={closeToast} />
           }
         </div>
       </div>
