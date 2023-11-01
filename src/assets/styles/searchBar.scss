@@ -1,0 +1,36 @@
+.search-bar {
+  
+  div {
+    display: flex;
+    align-items: center;
+    // width: 700px;
+    gap: 1rem;
+    @media screen and (min-width: 550px) {
+      width: 100%;
+    }
+    form {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      margin: 12px 5px;
+      padding: 10px;
+      border-radius: 8px;
+      border: 2px solid $primary;
+      input {
+        padding: 0 10px;
+        border: none;
+        outline: none;
+        width: 100%;
+        font-size: 16px;
+        font-weight: 100;
+      }
+      img {
+        width: 24px;
+        height: 24px;
+      }
+    }
+    button {
+      @include blue-button(138px, 46px);
+    }
+  }
+}

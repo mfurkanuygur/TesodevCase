@@ -1,8 +1,10 @@
 @use "./variables.scss" as *;
+@import "./resultPage.scss";
+@import "./resultsListField.scss";
 @import "./addRecordPage.scss";
+@import "./searchBar.scss";
 @import "./functions.scss";
-
-
+@import "./addNewRecordBtn.scss";
 
 body {
   padding: 0;
@@ -22,13 +24,6 @@ body {
   @media screen and (min-width: #{$genislik-orta + 1}) {
     width: 1280px;
   }
-}
-.new-record-btn {
-  @include blue-button(197.16px, 46px);
-  position: absolute;
-  right: 0;
-  top: 0;
-  margin: 64px 62.86px;
 }
 
 // main {
@@ -51,54 +46,6 @@ body {
 //       line-height: normal;
 //     }
 //   }
-//   .search-field {
-//     width: 700px;
-//     min-height: 500px;
-//     h1 {
-//       padding: 0;
-//       margin: 0;
-//       color: var(--ink-darkest, #090a0a);
-//       font-family: "Inter", sans-serif;
-//       font-size: 32px;
-//       font-style: normal;
-//       font-weight: 700;
-//       line-height: 36px;
-//     }
-//     div {
-//       display: flex;
-//       align-items: center;
-//       form {
-//         width: 100%;
-//         display: flex;
-//         align-items: center;
-//         margin: 12px 5px;
-//         padding: 14px;
-//         border-radius: 8px;
-//         border: 2px solid $primary;
-//         input {
-//           padding: 0 10px;
-//           border: none;
-//           outline: none;
-//           width: 100%;
-//           font-size: 16px;
-//           font-weight: 100;
-//         }
-//         img {
-//           width: 24px;
-//           height: 24px;
-//         }
-//       }
-//       button {
-//         @include blue-button(8.625rem, 2.875rem);
-
-//         font-size: 18px;
-//         font-style: normal;
-//         font-weight: 700;
-//         line-height: normal;
-//       }
-//     }
-//   }
-// }
 
 // .footer {
 //   background: rgba(41, 78, 152, 0.72);

@@ -1,0 +1,8 @@
+.new-record-btn {
+  @include blue-button(197.16px, 46px);
+  margin-top: 13px;
+  margin-left: 75px;
+  @media screen and (max-width: 550px) {
+    margin-left: 0px;
+  }
+}

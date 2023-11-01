@@ -3,10 +3,10 @@ import searchIcon from '../../assets/images/searchIcon.svg'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { setFilteredDatas, setSearchInputValue } from "../../redux/slices/searchSlice"
+import SearchBar from '../SearchBar'
 
 const SearchField = () => {
     const inputRef = useRef()
-    // const mainDatas = JSON.parse(sessionStorage.getItem("syncData"))
     const dispatch = useDispatch();
     const mainDatas = useSelector((state) => state?.search?.allDatas)
     const filteredDatas = useSelector((state) => state?.search?.filteredDatas)
@@ -26,13 +26,14 @@ const SearchField = () => {
     return (
         <section className="search-field">
             <h1>Find in records</h1>
-            <div>
+            <SearchBar/>
+            {/* <div>
                 <form >
                     <img src={searchIcon} alt="searchIcon" />
                     <input type="text" placeholder='You can search here...' ref={inputRef} value={searchInputValue} onChange={() => searchingValue()} />
                 </form>
                 <Link to="/results"><button type="submit">Search</button></Link>
-            </div>
+            </div> */}
             <ul>
                 {
                     filteredDatas?.length == 1000 ?
